@@ -1,0 +1,9 @@
+<p>Appareil : <input type="text" [(ngModel)]="name"> </p>
+<p>Status :
+  <select name="status" id="status" class="form-control" [(ngModel)]='status'>
+    <option value="Stock">En Stock</option>
+    <option value="Rupture">Rupture de stock</option>
+  </select>
+</p>
+<button (click)="updateAppareil()">Modifier</button>
+<a routerLink="/appareils">Retour à la liste</a>

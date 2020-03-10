@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-2" *ngFor="let act of aActionsNav">
+    <button *ngIf="act.action === 'NAV'" class="btn btn-{{ act.color }}" (click)="navigateTop(act.argument)" [innerHTML]="act.name"></button>
+    <button *ngIf="act.action === 'PDF'" class="btn btn-{{ act.color }}" (click)="exportPDF" [innerHTML]="act.name"></button>
+    <button *ngIf="act.action === 'EXCEL'" class="btn btn-{{ act.color }}" (click)="exportEXCEL" [innerHTML]="act.name"></button>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped table-dark table-bordered table-hover">
+    <thead>
+    <tr>
+      <th *ngFor="let item of aProperties" [innerHTML]="item.colName"></th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of aValues">
+      <td *ngFor="let prop of aProperties">
+        <div *ngIf="prop.type === 'string' || prop.type === 'number'" [innerHTML]="item[prop.property]"></div>
+        <div *ngIf="prop.type === 'bool'" [ngClass]="{'circle': true, 'bg-success': item[prop.property], 'bg-danger': !item[prop.property]}"></div>
+        <div *ngIf="prop.type === 'progress'" class="progress">
+          <div *ngIf="prop.prog >= 0 && prop.prog < 25" class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 200px" [attr.aria-valuenow]='prop.prog' [attr.aria-valuemin]="0" [attr.aria-valuemax]="24"></div>
+          <div *ngIf="prop.prog >= 25 && prop.prog < 75" class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 200px" [attr.aria-valuenow]='prop.prog' [attr.aria-valuemin]="25" [attr.aria-valuemax]="74"></div>
+          <div *ngIf="prop.prog >= 75 && prop.prog <= 100" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 200px" [attr.aria-valuenow]='prop.prog' [attr.aria-valuemin]="75" [attr.aria-valuemax]="100"></div>
+        </div>
+        <div *ngIf="prop.type === 'date'">{{ item[prop.property] | date: 'dd mmmm YYYY' }}</div>
+        <div *ngIf="prop.type === 'dateTime'">{{ item[prop.property] | date: 'dd mmmm YYYY, H:mm:ss' }}</div>
+        <div *ngIf="prop.type === 'object' && prop.arg.length == 1" [innerHTML]="item[prop.property][prop.arg[0]]"></div>
+        <div *ngIf="prop.type === 'object' && prop.arg.length == 2" [innerHTML]="item[prop.property][prop.arg[0]][prop.arg[1]]"></div>
+        <div *ngIf="prop.type === 'object' && prop.arg.length == 3" [innerHTML]="item[prop.property][prop.arg[0]][prop.arg[1]][prop.arg[2]]"></div>
+        <div *ngIf="prop.type === 'object' && prop.arg.length == 4" [innerHTML]="item[prop.property][prop.arg[0]][prop.arg[1]][prop.arg[2]][prop.arg[3]]"></div>
+      </td>
+      <td>
+        <div *ngFor="let action of aActions">
+          <button *ngIf="action.type === 'link'" class="btn btn-{{ action.color }}"
+                  (click)="navigateGeneric(action.routerLink, item[action.routerLinkProp])"
+                  [innerHTML]="action.name"></button>
+          <button *ngIf="action.type === 'delete'" class="btn btn-{{ action.color }}"
+                  (click)="delete(item[action.actionArg], action.actionService)"
+                  [innerHTML]="action.name"></button>
+          <app-detail *ngIf="action.type === 'modal'"
+                      [oProperties]="action.properties"
+                      [oValue]="item"
+                      [oModalParameters]="action.modalParameters"></app-detail>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

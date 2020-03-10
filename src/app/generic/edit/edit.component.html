@@ -1,0 +1,56 @@
+<h1>Edition</h1>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <form [formGroup]="editForm" (ngSubmit)="updateObject()">
+      <div class="form-group" *ngFor="let item of aProperties">
+        <label [attr.for]="item.value">{{ item.label }}</label>
+        <input *ngIf=" item.type === 'text'"
+               [attr.type]="item.type"
+               [attr.id]="item.value"
+               class="form-control"
+               [formControlName]="item.value"
+               [(ngModel)]="oValue[item.value]">
+        <input *ngIf="item.type === 'checkbox'"
+               [attr.type]="item.type"
+               [attr.id]="item.value"
+               class="form-control"
+               [formControlName]="item.value"
+               [(ngModel)]="oValue[item.value]"
+               [checked]="oValue[item.value]">
+        <input *ngIf="item.type === 'date'"
+               [attr.type]="item.type"
+               [attr.id]="item.value"
+               class="form-control"
+               [formControlName]="item.value"
+               [(ngModel)]="oValue[item.value]">
+        <input *ngIf="item.type === 'datetime'"
+               [attr.type]="item.type"
+               [attr.id]="item.value"
+               class="form-control"
+               [formControlName]="item.value"
+               [(ngModel)]="oValue[item.value]">
+        <select  *ngIf=" item.type === 'select'"
+                 [attr.id]="item.value"
+                 class="form-control"
+                 [formControlName]="item.value"
+                 [compareWith]="fCompare"
+                 [(ngModel)]="oValue[item.value]">
+          <option *ngFor="let opt of item.options"
+                  [ngValue]="opt.value"
+                  [innerHTML]="opt.html">
+          </option>
+        </select>
+        <textarea *ngIf="item.type === 'textarea'"
+                  class="form-control"
+                  [attr.id]="item.value"
+                  [formControlName]="item.value"
+                  [(ngModel)]="oValue[item.value]"
+                  cols="30" rows="10">
+        </textarea>
+      </div>
+      <button *ngIf="sAction === 'editer'" class="btn btn-primary" type="submit" [disabled]="editForm.invalid">Editer</button>
+      <button *ngIf="sAction === 'creer'" class="btn btn-primary" type="submit" [disabled]="editForm.invalid">Créer</button>
+    </form>
+  </div>
+</div>

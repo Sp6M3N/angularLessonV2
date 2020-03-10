@@ -1,0 +1,61 @@
+<h1>Listes des déclarations</h1>
+<!--<button class="btn btn-success" routerLink="new">Ajouter une déclaration</button>-->
+<!--<div class="table-responsive">-->
+<!--  <table class="table table-striped table-dark table-bordered table-hover">-->
+<!--    <thead>-->
+<!--      <tr>-->
+<!--        <th scope="col">ID</th>-->
+<!--        <th scope="col">Déclarations</th>-->
+<!--        <th scope="col">Active</th>-->
+<!--        <th scope="col">Action</th>-->
+<!--      </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--      <tr *ngFor="let typeDeclaration of typeDeclarations" scope="row">-->
+<!--        <td>{{ typeDeclaration.id }}</td>-->
+<!--        <td>{{ typeDeclaration.name }}</td>-->
+<!--        <td><input type="checkbox" [checked]="typeDeclaration.valide" [disabled]="true"></td>-->
+<!--        <td><button class="btn btn-success" [routerLink]="[typeDeclaration.id]">Modifier</button></td>-->
+<!--      </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+<app-listing
+  [oService]="typeDeclarationService"
+  [aProperties]="[
+    {'property': 'id', 'colName': 'ID', 'type': 'progress', 'prog': '22'},
+    {'property': 'name', 'colName': 'Déclarations', 'type': 'string'},
+    {'property': 'fk_organisme', 'arg': ['name'], 'colName': 'Organisme', 'type': 'object'},
+    {'property': 'valide', 'colName': 'Active', 'type': 'bool'}
+  ]"
+  [aValues]="aTypeDeclarations"
+  [aActions]="[
+    {'type': 'modal', 'properties':
+        {
+           'Detail du type de déclaration': [
+               {
+                   'type': 'number',
+                   'label': 'ID: ',
+                   'value': 'id'
+               },
+               {
+                   'type': 'text',
+                   'label': 'NAME: ',
+                   'value': 'name'
+               }
+           ]
+        },
+        'modalParameters':
+            {
+                'label': 'tata',
+                'title': 'titre de ma modal'
+            }, 'color': 'primary'},
+    {'type': 'link', 'name': 'Edit','color': 'warning', 'routerLink': '/type-declarations', 'routerLinkProp': 'id'},
+    {'type': 'delete', 'name': 'Delete','color': 'danger', 'actionService': typeDeclarationService, 'actionArg': 'id'}
+  ]"
+  [aActionsNav]="[
+    {'name': 'Add', 'color': 'success', 'action': 'NAV', 'argument': ['/type-declarations/new']},
+    {'name': 'Export PDF', 'color': 'primary', 'action': 'PDF', 'argument': ['PDF']},
+    {'name': 'Export EXCEL', 'color': 'secondary', 'action': 'EXCEL', 'argument': ['EXCEL']}]">
+
+</app-listing>

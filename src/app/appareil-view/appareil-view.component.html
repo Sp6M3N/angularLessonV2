@@ -1,0 +1,33 @@
+<h2>Mes appareils Apple</h2>
+<!--<p>Mis à jour : {{ lastUpdate | async | date : 'y MMMM EEEE d' | uppercase }}</p>-->
+<!--<ul class="list-group">-->
+<!--  <app-appareil-->
+<!--    *ngFor="let appareil of appareils; let i = index"-->
+<!--    [appareilName]="appareil.name"-->
+<!--    [appareilStatus]="appareil.status"-->
+<!--    [index]="i"-->
+<!--    [id]="appareil.id"-->
+<!--  ></app-appareil>-->
+<!--</ul>-->
+<!--<button class="btn btn-success"-->
+<!--        (click)="onStock()"-->
+<!--        [disabled]="!isAuth">Tout en stock</button>-->
+<!--<button class="btn btn-danger"-->
+<!--        (click)="onRupture()"-->
+<!--        [disabled]="!isAuth">Rupture de stock</button>-->
+<app-listing
+  [aProperties]="[
+    {'property': 'id', 'colName': 'id de mon appareil', 'type': 'number'},
+    {'property': 'name', 'colName': 'Nom appareil', 'type': 'string'},
+    {'property': 'status', 'colName': 'Status du stock', 'type': 'string'}
+  ]"
+  [aValues]="appareils"
+  [aActions]="[
+    {'name': 'Detail','color': 'primary', 'routerLink': '/appareils', 'routerLinkProp': 'id'},
+    {'name': 'Edit','color': 'warning', 'routerLink': '/appareils', 'routerLinkProp': 'id'},
+    {'name': 'Delete','color': 'danger', 'routerLink': '', 'routerLinkProp': 'id'}
+  ]"
+  [aActionsNav]="[{'name': 'Add', 'color': 'success', 'action': 'NAV', 'argument': ['/edit']},
+                 {'name': 'Export PDF', 'color': 'primary', 'action': 'PDF', 'argument': ['PDF']},
+                 {'name': 'Export EXCEL', 'color': 'secondary', 'action': 'EXCEL', 'argument': ['EXCEL']}]">
+</app-listing>

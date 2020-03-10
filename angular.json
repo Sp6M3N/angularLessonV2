@@ -3,9 +3,32 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angularLessonV2": {
+    "angularLesson": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +36,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angularLessonV2",
+            "outputPath": "dist/angularLesson",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,9 +47,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -63,18 +90,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angularLessonV2:build"
+            "browserTarget": "angularLesson:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angularLessonV2:build:production"
+              "browserTarget": "angularLesson:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angularLessonV2:build"
+            "browserTarget": "angularLesson:build"
           }
         },
         "test": {
@@ -89,7 +116,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -111,15 +138,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angularLessonV2:serve"
+            "devServerTarget": "angularLesson:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angularLessonV2:serve:production"
+              "devServerTarget": "angularLesson:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "angularLessonV2"
+  "defaultProject": "angularLesson"
 }

@@ -1,0 +1,29 @@
+<!--<div class="row">-->
+<!--  <div class="col-sm-8 col-sm-offset-2">-->
+<!--    <form [formGroup]="typeDeclarationForm" (ngSubmit)="onSubmit()">-->
+<!--      <div class="form-group">-->
+<!--        <label for="name">Nom de la déclaration</label>-->
+<!--        <input type="text" id="name" class="form-control" formControlName="name" [(ngModel)]="oTypeDeclaration.name">-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="valide">Validité</label>-->
+<!--        <input type="checkbox" id="valide" formControlName="valide" checked [(ngModel)]="oTypeDeclaration.valide">-->
+<!--      </div>-->
+<!--      <button class="btn btn-primary" type="submit" [disabled]="typeDeclarationForm.invalid">Valider</button>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+<app-edit
+  [editForm] = "typeDeclarationForm"
+  [oValue] ="oTypeDeclaration"
+  [oService]= "typeDeclarationService"
+  [returnLink]="'/type-declarations'"
+  [aProperties]="[
+  {'type': 'text', 'label': 'Nom de la déclaration', 'value': 'name'},
+  {'type': 'select', 'label': 'Organismes', 'value': 'fk_organisme', 'options': aOptionsOrganisme},
+  {'type': 'checkbox', 'label': 'Active', 'value': 'valide'}
+]"
+  [sAction]="sAction"
+>
+</app-edit>

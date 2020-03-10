@@ -1,0 +1,35 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#' + idUnique">
+  Detail
+</button>
+
+<!-- Modal -->
+<div class="modal fade" [id]=idUnique tabindex="-1" role="dialog" [attr.aria-labelledby]='oModalParameters.label' aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" [attr.id]='oModalParameters.label'>{{ oModalParameters.title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let prop of oProperties | keyvalue">
+          <h6>{{ prop.key }}</h6>
+          <div *ngFor="let val of prop.value">
+            <p *ngIf="val.type === 'text' || val.type === 'number'">
+              <span>{{ val.label }}</span>
+              <span [innerHTML]="oValue[val.value]"></span>
+            </p>
+            <p *ngIf="val.type === 'date'">
+              <span>{{ val.label }}</span>
+              <span>{{ oValue[val.value] | date: 'mediumDate' : 'UTC' : 'fr_FR'}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
